@@ -5,12 +5,12 @@ const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser")
 
 const transporter = nodemailer.createTransport({
-    host: "smtp-relay.sendinblue.com",
+    host: process.env.SMTP_HOST,
     port: 587,
     secure: false,
     auth: {
-        user: 'anican047@gmail.com',
-        pass: 'nFz1pRc6AQPkCrt0'
+        user: process.env.SMTP_USERNAME,
+        pass: process.env.SMTP_PASSWORD
     }
 });
 
@@ -18,7 +18,7 @@ async function sendMail(name, email, message) {
 
     let info = await transporter.sendMail({
         from: '"Portfolio Connect" <portfolio@jahnavi.me>', // sender address
-        to: "saanirud99@gmail.com", // list of receivers
+        to: process.env.RECEIVER_EMAIL,
         subject: "Your portfolio is gaining attention❗", // Subject line
         html: `<html>
         <head>
